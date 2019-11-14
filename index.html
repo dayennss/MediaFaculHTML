@@ -1,0 +1,116 @@
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous">
+</script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+<div class="container center-block">
+<br>
+	<h2 class="text-primary"> Cálculo de avaliação </h2> <br>
+	<div class="row center-block">
+		<div class="col-lg-5"> 
+			<h5 class="text-center">
+			Primeira avaliação 
+			</h5>
+  
+			<p>Nota da ap1 <input type="text" class="ap1 form-control"> </p>
+			<p>Nota da ap2 <input type="text" class="ap2 form-control"> </p>
+	
+			<h5 class="text-center "> 
+			Segunda avaliação
+			</h5>
+		
+			<p> Nota da ap3 <input type="text" class="ap3 form-control"> </p>
+			<p> Nota da ap4 <input type="text" class="ap4 form-control"></p>
+		
+			<button  class="btn-calcular btn btn-primary" value="enviar">Enviar </button>
+  
+		</div>
+		
+		
+		<div class="ool-lg-4 text-center">
+			<div class="hidden card-mensagem-final">
+				<h2>  </h2>
+				<div> 
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="alert alert-danger hidden col-lg-5" role="alert">
+		
+	</div>
+</div>
+
+<style> 
+.hidden {
+	display:none;
+}
+.card-mensagem-final {
+border-radius: 10px;
+padding:20px;
+margin-top: 40px;
+margin-left: 20px;
+color: #333;
+}
+
+.aprovado {
+background-color:rgba(40,255,140,1);
+}
+.avs {
+background-color:rgba(255,0,0,.5);
+}
+</style>
+
+<script>
+	$('.btn-calcular').on('click', function() {
+  		var ap1 = $('.ap1').val()
+		var ap2 = $('.ap2').val()
+		var ap3 = $('.ap3').val()
+		var ap4 = $('.ap4').val()
+		
+		$('.alert').addClass('hidden')
+		var soma = 0;
+		
+		
+		if (ap1 == "") {
+			$('.alert').text("Preencha a nota da AP1 ")
+			$('.alert').removeClass('hidden')
+			return
+		} else if (ap2 == ""){
+			$('.alert').text("Preencha a nota da AP2 ")
+			$('.alert').removeClass('hidden')
+			return		
+		} else if (ap3 == ""){
+			$('.alert').text("Preencha a nota da AP3 ")
+			$('.alert').removeClass('hidden')
+			return		
+		} else if (ap4 == ""){
+			$('.alert').text("Preencha a nota da AP4")
+			$('.alert').removeClass('hidden')
+			return
+		}
+		
+		var primeiraA = ((ap1 * 5) + (ap2 * 5)) / 10
+		var segundaA = ((ap3 * 3) + (ap4 * 7))/ 10
+		soma = (primeiraA + segundaA) / 2
+		
+		if(soma > 7) {
+			$('.card-mensagem-final h2').append("Parabénss! Você foi aprovado.")
+			$('.card-mensagem-final div p').append("Sua nota foi acima da média e por isso você não ficou em AVS nessa matéria. <br>")
+			$('.card-mensagem-final div p').append("Sua média final total foi de: " + soma)
+			$('.card-mensagem-final').addClass('aprovado')
+			$('.card-mensagem-final').removeClass('hidden')
+		}else {
+			$('.card-mensagem-final h2').append("Opsss!!")
+			$('.card-mensagem-final div p').append("Sua nota foi abaixo da média e por isso você acabou ficando na AVS nessa matéria. <br>")
+			$('.card-mensagem-final div p').append("Sua média final total foi de: " + soma)
+			$('.card-mensagem-final').addClass('avs')
+			$('.card-mensagem-final').removeClass('hidden')
+		}		
+
+  	})
+</script>
